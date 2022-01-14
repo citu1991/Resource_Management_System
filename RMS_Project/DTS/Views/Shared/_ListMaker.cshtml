@@ -1,0 +1,52 @@
+﻿@model DTS.Models.MakerModel
+@{
+    var SRNO = 1;
+}
+
+<form style="padding-top:15px">
+    <hr />
+    <h2>List of Makers</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    Sr. No
+                </th>
+                <th>
+                    Maker Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @if (Model.LIST_MAKER.Count > 0 && Model.LIST_MAKER[0].Error == null)
+        {
+            foreach (var item in Model.LIST_MAKER)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.MakerId, new { @class = "MakerId" })
+                        @SRNO
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MakerName)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="EditMaker(@item.MakerId)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="DeleteMaker(@item.MakerId)">Delete</button>
+
+                    </td>
+                </tr>
+                SRNO++;
+            }
+        }
+        else
+        {
+            <tr class="table-danger">
+                <td colspan="3" style="text-align: center">No Data Exists</td>
+            </tr>
+        }
+    </table>
+</form>
+

@@ -1,0 +1,53 @@
+﻿@model DTS.Models.DisplaySizeModel
+@{
+    var SRNO = 1;
+}
+
+<form style="padding-top:15px">
+    <hr />
+    <h2>List of DisplaySizes</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    Sr. No
+                </th>
+                <th>
+                    DisplaySize Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @if (Model.LIST_DISPLAYSIZE.Count > 0 && Model.LIST_DISPLAYSIZE[0].Message == null)
+        {
+            foreach (var item in Model.LIST_DISPLAYSIZE)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.DisplaySizeId, new { @class = "DisplaySizeId" })
+                        @SRNO
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DisplaySize)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="EditDisplaySize(@item.DisplaySizeId)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="DeleteDisplaySize(@item.DisplaySizeId)">Delete</button>
+
+                    </td>
+                </tr>
+                SRNO++;
+            }
+        }
+        else
+        {
+            <tr class="table-danger">
+                <td colspan="3" style="text-align: center">No Data Exists</td>
+            </tr>
+        }
+    </table>
+</form>
+
+

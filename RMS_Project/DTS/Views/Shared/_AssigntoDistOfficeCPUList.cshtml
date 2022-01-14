@@ -1,0 +1,123 @@
+﻿@model System.Data.DataSet
+@using System.Data;
+
+@{
+    int SrNo = 1;
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<fieldset class="col-lg-12">
+    <ul class="nav nav-pills" style="background-color:#cbefeb;font-weight:bold">
+
+        <li class="nav-item">
+            <a class="nav-link active rounded-0" data-toggle="pill" href="#InboxCPU">CPUs Assignment Pending For District Offices</a>
+        </li>
+    </ul>
+
+    @if (Model != null)
+    {
+        <div class="form-group">
+            <div class="table-responsive">
+                <div class="tab-content">
+                    <div class="tab-pane container active p-1" id="InboxCPU">
+                        <h5 class="p-0 text-center"><b>List of CPU/All in One/Laptops</b></h5>
+
+                        <table class="table table-bordered table-striped mt-2 small">
+                            <thead class="thead-dark text-white">
+                                <tr>
+                                    <th colspan="2">Name of District Offices:</th>
+                                    <th colspan="2">@Html.DropDownList("list", new SelectList((System.Collections.IEnumerable)ViewBag.DistrictList, "Value", "Text", "--Select District Office--"), new { @class = "form-control DistrictValue" })</th>
+                                    <th colspan="6"><button type="submit" onclick="AssignCPUtoDistrictOffice()" class="btn btn-success">Click here to Assign</button></th>
+                                </tr>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Sr. No.</th>
+                                    <th>Equipment Type</th>
+                                    <th>Serial No.</th>
+                                    <th>Model</th>
+                                    <th>Maker</th>
+                                    <th>Processor</th>
+                                    <th>RAM</th>
+                                    <th>Storage</th>
+                                    <th>Warranty (In Years)</th>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @if (Model.Tables[0].Rows.Count > 0)
+                                {
+                                    foreach (DataRow row in Model.Tables[0].Rows)
+                                    { 
+                                <tr>
+                                    <td><input type="checkbox" class="AssignCPUtoDoffice" value="@row["CPUId"]"></td>
+                                    <td>@SrNo.</td>
+                                    <td>@row["EquipmentName"] </td>
+                                    <td>@row["CPUSerialNo"] </td>
+                                    <td>@row["DeviceModel"] </td>
+                                    <td>@row["MakerName"] </td>
+                                    <td>@row["ProcessorType"] </td>
+                                    <td>@row["RAMSize"] </td>
+                                    <td>@row["Storage"] </td>
+                                    <td>@row["Warranty"] </td>
+
+                                </tr>
+                                        SrNo++;
+
+                                    }
+                                }
+                                else
+                                {
+                                <tr>
+                                    <td colspan="10" style="color: red; text-align: center">No Data Exists for Verification</td>
+                                </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+</fieldset>
+
+<script type="text/javascript">
+
+    function AssignCPUtoDistrictOffice() {
+
+        var CPUIDs = [];
+        debugger;
+        var District_Id = $('.DistrictValue').val();
+        $('.AssignCPUtoDoffice:checked').each(function () {
+            CPUIDs.push($(this).val());
+        });
+        var selected;
+        selected = CPUIDs.join(',');
+        if (selected.length > 0 && District_Id > 0) {
+            $.ajax({
+                url: '/Component/AssignCPUtoDistOffice',
+                type: "Get",
+                dataType: "json",
+                contentType: "application/json",
+                data: { DistrictId: District_Id, CPUIds: selected },
+                success: function (res) {
+
+                    if (res > 0) {
+                        alert('System Assigned to Circle Office ( ' + $('.DistrictValue option:selected').text() + ' ) Successfully please assign to Concerned Staff/Officer.');
+                    }
+                    else { alert('Error!........System not assigned.'); }
+                    window.location.reload();
+                }
+            });
+        }
+        else
+        {
+            alert('Please Select District Office or System No');
+        }
+        
+    }
+</script>

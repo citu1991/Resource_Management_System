@@ -1,0 +1,54 @@
+﻿@model DTS.Models.DeviceModelModel 
+@{
+    ViewBag.Title = "Add Device Model";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<h2>Add Device Model</h2>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+@using (Html.BeginForm("AddDeviceModel", "Device", FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+
+    <form>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row form-group">
+            <div class="col-md-2">
+                <label class="form-group">Equipment Name : </label>
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownListFor(m => m.EquipmentId, new SelectList(Model.LIST_EQUIPMENTTYPE, "EquipmentId", "EquipmentName"), "--Select Equipment--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EquipmentName, "", new { @class = "text-danger" })               
+            </div>
+            <div class="col-md-4">
+                <input type="submit" name="submit" value="Add Model" class="btn btn-info" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-2">
+                <label class="form-group">Device Model Name : </label>
+            </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Device_Model, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Device Model here" } })
+                    @Html.ValidationMessageFor(model => model.Device_Model, "", new { @class = "text-danger" })
+                </div>
+            <div class="col-md-4">
+                <input type="submit" name="reset" value="Reset" class="btn btn-dark" />
+            </div>
+            </div>
+
+    </form>
+}
+
+<div>
+    @Html.Partial("_ListDeviceModel", Model)
+</div>

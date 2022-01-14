@@ -1,0 +1,96 @@
+﻿@model DTS.Models.DeviceModelModel
+@{
+    var SRNO = 1;
+}
+
+<form style="padding-top:15px">
+    <hr />
+    <h2></h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th colspan="4" style="text-align:center;font-size:large">List of Device Model</th>
+            </tr>
+            <tr>
+                <th>
+                    Sr. No
+                </th>
+                <th>
+                    Equipment Name
+                </th>
+                <th>
+                    Device Model
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @if (Model.LIST_DEVICEMODEL.Count > 0 && Model.LIST_DEVICEMODEL[0].Error == null)
+        {
+            foreach (var item in Model.LIST_EQUIPMENTTYPE)
+            {
+                <tr>
+                    <td>@SRNO .</td>
+                    <td>@Html.DisplayFor(modelitem => item.EquipmentName) </td>
+                    @if (Model.LIST_DEVICEMODEL.Count > 0)
+                    {
+                        <td>
+                            @foreach (var itemDevice in Model.LIST_DEVICEMODEL)
+                            {
+                                if (item.EquipmentId == itemDevice.EquipmentId)
+                                {
+                                    @Html.DisplayFor(modelitem => itemDevice.Device_Model)
+                                    <br />
+                                    <br />
+                                                    <br />
+                                }
+
+
+                            }
+
+                        </td>
+
+                        <td>
+                            @foreach (var itemDevice in Model.LIST_DEVICEMODEL)
+                            {
+                                if (item.EquipmentId == itemDevice.EquipmentId)
+                                {
+
+
+                                    <div onclick="EditDistrict(@itemDevice.DeviceModelId)" class="btn btn-primary">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                        <span>
+                                            <strong>Edit</strong>
+                                        </span>
+                                    </div>
+
+                                                    <b>|</b>
+                                                        <div onclick="ConfirmDelete(@itemDevice.DeviceModelId)" class="btn btn-danger">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                            <span>
+                                                                <strong>Delete</strong>
+                                                            </span>
+                                                        </div>
+
+                                                        <br />
+                                                        <br />
+                                }
+                            }
+
+                        </td>
+                    }
+                </tr>
+                SRNO++;
+            }
+        }
+        else
+        {
+            <tr class="table-danger">
+                <td colspan="4" style="text-align: center">No Data Exists</td>
+            </tr>
+        }
+    </table>
+</form>
+
+

@@ -1,0 +1,56 @@
+﻿@model DTS.Models.PrinterTechModel
+@{
+    var SRNO = 1;
+}
+
+<form style="padding-top:15px">
+    <hr />
+    <h2>List of PrinterTech</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    Sr. No
+                </th>
+                <th>
+                    PrinterTech Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @if (Model.LIST_PRINTERTECH.Count > 0 && Model.LIST_PRINTERTECH[0].Message == null)
+        {
+            foreach (var item in Model.LIST_PRINTERTECH)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.PrinterTechId, new { @class = "PrinterTechId" })
+                        @SRNO
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrinterTech)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="EditPrinterTech(@item.PrinterTechId)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="DeletePrinterTech(@item.PrinterTechId)">Delete</button>
+
+                    </td>
+                </tr>
+                SRNO++;
+            }
+        }
+        else
+        {
+            <tr class="table-danger">
+                <td colspan="3" style="text-align: center">No Data Exists</td>
+            </tr>
+        }
+    </table>
+</form>
+
+
+
+
+

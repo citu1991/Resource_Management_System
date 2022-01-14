@@ -1,0 +1,53 @@
+﻿@model DTS.Models.BatteryTypeModel
+@{
+    var SRNO = 1;
+}
+
+<form style="padding-top:15px">
+    <hr />
+    <h2>List of Battery Type</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    Sr. No
+                </th>
+                <th>
+                    Battery Type
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @if (Model.LIST_BATTERYTYPE.Count > 0 && Model.LIST_BATTERYTYPE[0].Message == null)
+        {
+            foreach (var item in Model.LIST_BATTERYTYPE)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.BatteryTypeId, new { @class = "BatteryTypeId" })
+                        @SRNO
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BatteryType)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="EditBatteryType(@item.BatteryTypeId)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="DeleteBatteryType(@item.BatteryTypeId)">Delete</button>
+
+                    </td>
+                </tr>
+                SRNO++;
+            }
+        }
+        else
+        {
+            <tr class="table-danger">
+                <td colspan="3" style="text-align: center">No Data Exists</td>
+            </tr>
+        }
+    </table>
+</form>
+
+

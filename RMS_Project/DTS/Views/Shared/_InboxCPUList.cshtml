@@ -1,0 +1,123 @@
+﻿@using System.Data
+@model DataTable
+
+@{
+    int SrNo = 1;   
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<fieldset class="col-lg-12">
+    <ul class="nav nav-pills" style="background-color:#cbefeb;font-weight:bold">
+
+        <li class="nav-item">
+            <a class="nav-link active rounded-0" data-toggle="pill" href="#InboxCPU">Verification Pending For CPUs</a>
+        </li>       
+    </ul>
+
+    @if (Model != null)
+    {
+        <div class="form-group">
+            <div class="table-responsive">
+                <div class="tab-content">
+                    <div class="tab-pane container active p-1" id="InboxCPU">
+                        <h5 class="p-0 text-center"><b>List of CPU/All in One/Laptops</b></h5>
+                       
+                        <table class="table table-bordered table-striped mt-2 small">                          
+                            <thead class="thead-dark text-white">
+                                @*<tr>
+                                    <th colspan="2">Name of Circle:</th>
+                                    <th colspan="2">@Html.DropDownList("list", new SelectList((System.Collections.IEnumerable)ViewBag.CircleList,"Value", "Text", "--Select Circle--"), new {@class = "form-control Value" })</th>
+                                    <th colspan="7"><button type="submit" onclick="AssignOffice()" class="btn btn-success">Click here to Assign</button></th>
+                                </tr>*@
+                                <tr>
+                                                                    
+                                    <th>Sr. No.</th>
+                                    <th>Equipment Type</th>
+                                    <th>Serial No.</th>
+                                    <th>Model</th>
+                                    <th>Maker</th>
+                                    <th>Processor</th>
+                                    <th>RAM</th>
+                                    <th>Storage</th>
+                                    <th>Warranty (In Years)</th>
+                                    <th>Action</th> 
+                                    
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @if (Model.Rows.Count>0)
+                                {
+                                    foreach (DataRow row in Model.Rows)
+                                    {
+
+                                        <tr>                                            
+                                           
+                                            <td>@SrNo.</td>
+                                            <td>@row["EquipmentName"] </td>
+                                            <td>@row["CPUSerialNo"] </td>
+                                            <td>@row["DeviceModel"] </td>
+                                            <td>@row["MakerName"] </td>
+                                            <td>@row["ProcessorType"] </td>
+                                            <td>@row["RAMSize"] </td>
+                                            <td>@row["Storage"] </td>
+                                            <td>@row["Warranty"] </td>
+                                            <td>                                             
+                                            <input type="text" placeholder="Enter Verification Code"  class="VerifyCode" >
+                                            <br /><br />
+                                            <input type="submit" onclick='VerifyInboxCPU(@row["CPUId"])' value="Verify" name="Verify">
+                                        </td>
+                                        </tr>
+                                        SrNo++;
+
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="11" style="color: red; text-align: center">No Data Exists for Verification</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+
+       
+
+    }
+</fieldset>
+<script type="text/javascript">
+     
+
+    function VerifyInboxCPU(CPU_Id)
+    {
+      
+            
+        var VC = $('.VerifyCode').val();
+        if (VC > 0)
+        {
+            $.ajax({
+                url: '/Component/InboxVerifyCPU',
+                type: "Get",
+                dataType: "json",
+                contentType: "application/json",
+                data: { VCode: VC ,CPUId:CPU_Id},
+                success: function (res)
+                {
+                    debugger;
+                    if(res>0)
+                    {
+                        alert('Verification done Successfully please Assign Circle Office');
+                    }
+                    else{ alert('Verification Failed Please check Verification Code or Contact to DTCP HQ office'); }
+                    window.location.reload();
+                  
+                }
+                
+            });
+        }
+    }
+</script>

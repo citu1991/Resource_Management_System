@@ -1,0 +1,202 @@
+﻿@model DTS.Models.ComponentViewModel
+@{
+    ViewBag.Title = "Add Component";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+
+<h2>Add Component</h2>
+
+@*<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>*@
+
+@using (Html.BeginForm("AddComponent", "Component", FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+
+    <form>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row form-group">
+            <div class="col-md-4">
+                Equipment Name :
+                @Html.DropDownListFor(m => m.EquipmentId, new SelectList(Model.LIST_EQUIPMENT, "EquipmentId", "EquipmentName"), "--Select Equipment--", new { @onchange = "FillModel()", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EquipmentId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                Model Name :
+                @Html.DropDownListFor(m => m.DeviceModelId, new SelectList(""), " ", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DeviceModelId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                Maker Name :
+                @Html.DropDownListFor(m => m.MakerId, new SelectList(Model.LIST_MAKER, "MakerId", "MakerName"), "--Select Maker--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MakerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="row form-group">
+            <div class="col-md-4">
+                Warranty (In Years) :
+                @Html.DropDownListFor(m => m.WarrantyId, new SelectList(Model.LIST_WARRANTY, "WarrantyId", "Warranty"), "--Select Warranty--", new {@class = "form-control" })
+                @Html.ValidationMessageFor(model => model.WarrantyId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                Serial No. :
+                @Html.EditorFor(m => m.SerialNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Serial No here" } })
+                @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                Date of Purchase :
+                @Html.EditorFor(m => m.DateofPurchase, new { htmlAttributes = new { @class = "form-control", @placeholder = " click here for Date->" } })
+                @Html.ValidationMessageFor(model => model.DateofPurchase, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="row form-group">
+            <div class="col-12">
+                Remarks (If Any) :
+                @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", @placeholder = "Enter Remarks if Any" })
+            </div>
+        </div>
+
+        <div id="CPUData" class="row form-group" style="display:none">
+            <div class="col-md-4">
+                Processor Type :
+                @Html.DropDownListFor(m => m.ProcessorId, new SelectList(Model.LIST_PROCESSOR, "ProcessorId", "ProcessorType"), "--Select Processor--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProcessorId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                Memory Size (In GB) :
+                @Html.DropDownListFor(m => m.RAMId, new SelectList(Model.LIST_RAM, "RAMId", "RAMCapacity"), "--Select Ram Size--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RAMId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                Storage Size :
+                @Html.DropDownListFor(m => m.StorageId, new SelectList(Model.LIST_STORAGE, "StorageId", "StorageSize"), "--Select Storage Size--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StorageId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="LEDData" class="row form-group" style="display:none">
+            <div class="col-md-6">
+                Display Size (In Inches) :
+                @Html.DropDownListFor(m => m.DisplaySizeId, new SelectList(Model.LIST_DISPLAYSIZE, "DisplaySizeId", "DisplaySize"), "--Select Display Size--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DisplaySizeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div id="PrinterData" class="row form-group" style="display:none">
+            <div class="col-md-4">
+                Printer Type :
+                @Html.DropDownListFor(m => m.PrinterTypeId, new SelectList(Model.LIST_PRINTERTYPE, "PrinterTypeId", "PrinterType"), "--Select Printer Type--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrinterTypeId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                Printer Technology :
+                @Html.DropDownListFor(m => m.PrinterTechId, new SelectList(Model.LIST_PRINTERTECH, "PrinterTechId", "PrinterTech"), "--Select Printer Technology--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrinterTechId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                Printer Color Type :
+                @Html.DropDownListFor(m => m.PrinterColorId, new SelectList(Model.LIST_PRINTERCOLOR, "PrinterColorId", "PrinterColor"), "--Select Printer Color Type--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrinterColorId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="SwitchData" class="row form-group" style="display:none">
+            <div class="col-md-4">
+                Switch Ports :
+                @Html.DropDownListFor(m => m.PortId, new SelectList(Model.LIST_PORT, "PortId", "Port"), "--Select Ports--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PortId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="UPSData" class="row form-group" style="display:none">
+            <div class="col-md-4">
+                UPS Battery Type :
+                @Html.DropDownListFor(m => m.BatteryTypeId, new SelectList(Model.LIST_BATTERYTYPE, "BatteryTypeId", "BatteryType"), "--Select Battery Type--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BatteryTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="row form-group">
+            <div class="col-md-2 offset-8">
+                <input type="submit" name="submit" value="Add Component" class="btn btn-info" />
+            </div>
+            <div class="col-md-2">
+                <input type="submit" name="reset" value="Reset" class="btn btn-dark" />
+            </div>
+        </div>
+
+    </form>
+}
+<script type="text/javascript">
+
+
+
+    function FillModel() {
+        debugger;
+            var EqpId=$('#EquipmentId').val();
+            var a = '';
+            if (this.$('#EquipmentId').val()==1 || this.$('#EquipmentId').val()==6 || this.$('#EquipmentId').val()==7)// CPU Laptop All in One
+            {
+                $("#LEDData,#UPSData,#PrinterData,#SwitchData").hide();
+                $("#CPUData").removeAttr("style");
+                $("#CPUData").attr("style", "display:flex");
+            }
+            else if (this.$('#EquipmentId').val()==2)//Monitor/LED
+            {
+                $("#CPUData,#UPSData,#PrinterData,#SwitchData").hide();
+                $("#LEDData").removeAttr("style");
+                $("#LEDData").attr("style", "display:flex");
+            }
+            else if (this.$('#EquipmentId').val() == 4)//UPS
+            {
+                $("#CPUData,#LEDData,#PrinterData,#SwitchData").hide();
+                $("#UPSData").removeAttr("style");
+                $("#UPSData").attr("style", "display:flex");
+            }
+            else if (this.$('#EquipmentId').val() == 5)//Printers
+            {
+                $("#CPUData,#LEDData,#UPSData,#SwitchData").hide();
+                $("#PrinterData").removeAttr("style");
+                $("#PrinterData").attr("style", "display:flex");
+            }
+            else if (this.$('#EquipmentId').val() == 8)//Switch
+            {
+                $("#CPUData,#LEDData,#UPSData,#PrinterData").hide();
+                $("#SwitchData").removeAttr("style");
+                $("#SwitchData").attr("style", "display:flex");
+            }
+            else { $("#CPUData,#LEDData,#UPSData,#PrinterData,#SwitchData").hide(); }
+           
+            $.ajax({
+                url: '/Component/GetModel',
+                type: "Get",
+                dataType: "json",
+                contentType: "application/json",
+                data: { ID_Eqp: EqpId },
+                success: function (res)
+                {
+                    $("#DeviceModelId").html("");
+                    a += '<option value="-1">--Select Model--</option>'
+                    $(res).each(function (index)
+                    {                      
+                        a += '<option value="' + res[index].DeviceModelId + '">'
+                            + res[index].Device_Model + '</option>'
+                    });
+                    $("#DeviceModelId").html(a);
+                }
+            });
+    };
+
+</script>

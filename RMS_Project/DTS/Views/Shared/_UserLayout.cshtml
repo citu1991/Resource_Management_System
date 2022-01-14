@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>T&CP-DTS</title>
+    <link href="~/dist/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/dist/css/styles.css" rel="stylesheet" />
+    <link href="~/dist/Online/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    @*<link rel="icon" type="image/x-icon" href="~/dist/assets/img/favicon.png" />*@
+    <script data-search-pseudo-elements defer src="~/dist/Online/all.min.js" crossorigin="anonymous"></script>
+    <script src="~/dist/Online/feather.min.js" crossorigin="anonymous"></script>
+</head>
+<body class="nav-fixed">
+    <nav class="topnav navbar navbar-expand shadow navbar-light bg-white" id="sidenavAccordion">
+        <a class="navbar-brand d-none d-sm-block" href="index.html">TCP Device Tracking System</a><button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2" id="sidebarToggle" href="#"><i data-feather="menu"></i></button>
+
+
+        <ul class="navbar-nav align-items-center ml-auto">
+            <li class="nav-item dropdown no-caret mr-3 dropdown-user">
+                Welcome  @Session["UserFullName"] (Circle Name :  <b> @Session["CircleName"]</b> )
+                <a class="btn btn-icon btn-transparent-dark" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="~/dist/Images/user.png" /></a>
+                <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
+                    <!--<h6 class="dropdown-header d-flex align-items-center">
+                        <div class="dropdown-user-details">
+                            <div class="dropdown-user-details-name">Circle: <br /><b> @Session["CircleName"]</b> </div>-->
+                            @*<div class="dropdown-user-details-name"> Welcome @Session["UserType"] <br />@Session["UserFullName"] </div>*@
+                        <!--</div>
+                    </h6>-->
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="@Url.Action("Profile", "Extra")">
+                        <div class="dropdown-item-icon"><i class="fa fa-user"></i></div>
+                        Profile
+                    </a>
+                    <a class="dropdown-item" href="@Url.Action("ChangePassword", "Extra")">
+                        <div class="dropdown-item-icon"><i class="fa fa-eye"></i></div>
+                        Change Password
+                    </a>
+                   
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="@Url.Action("Login", "UserLogin")">
+                        <div class="dropdown-item-icon"><i class="fa fa-power-off"></i></div>
+                        Logout
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sidenav shadow-right sidenav-dark">
+                <div class="sidenav-menu">
+                    <div class="nav accordion" id="accordionSidenav">
+                        <a class="nav-link collapsed active" href="javascript:void(0);" data-target="#collapseDashboards"
+                           aria-expanded="false" aria-controls="collapseDashboards">
+                            <div class="nav-link-icon"><i data-feather="activity"></i></div>
+                            Dashboards
+                        </a>
+
+                        @*<a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseComponent"
+                           aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="nav-link-icon"><i data-feather="package"></i></div>
+                            Master Add Component
+                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseComponent" data-parent="#accordionSidenav">
+                            <nav class="sidenav-menu-nested nav">
+                                <a class="nav-link" href="@Url.Action("AddComponent","Component")"><i class="fa fa-desktop"></i>&nbsp;Add Component</a>
+                            </nav>
+                        </div>*@
+
+
+                        <div class="sidenav-menu-heading">Network Eng. Section</div>
+                        <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#InboxComponent"
+                           aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="nav-link-icon"><i data-feather="package"></i></div>
+                           Inbox
+                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="InboxComponent" data-parent="#accordionSidenav">
+                            <nav class="sidenav-menu-nested nav">
+                                <a class="nav-link small" href="@Url.Action("InboxCPUComponents","Component")"><i class="fa fa-desktop"></i>&nbsp;CPU/All in One/Laptops</a>
+                                @*<a class="nav-link" href="@Url.Action("InboxPrintersComponents","Component")"><i class="fa fa-print"></i>&nbsp;Printers</a>*@
+                            </nav>
+                        </div>
+
+
+                        <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#AssigntoDistOffice"
+                           aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="nav-link-icon"><i data-feather="package"></i></div>
+                            Assign to District Office
+                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="AssigntoDistOffice" data-parent="#accordionSidenav">
+                            <nav class="sidenav-menu-nested nav">
+                                <a class="nav-link small" href="@Url.Action("AssigntoDistOfficeCPUComponents","Component")"><i class="fa fa-desktop"></i>&nbsp;CPU/All in One/Laptops</a>
+                                @*<a class="nav-link" href="@Url.Action("InboxPrintersComponents","Component")"><i class="fa fa-print"></i>&nbsp;Printers</a>*@
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#AssigntoStaff"
+                           aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="nav-link-icon"><i data-feather="package"></i></div>
+                            Assign to Officers/Staff
+                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="AssigntoStaff" data-parent="#accordionSidenav">
+                            <nav class="sidenav-menu-nested nav">
+                                <a class="nav-link small" href="@Url.Action("AssigntoDistStaffCPUComponents","Component")"><i class="fa fa-desktop"></i>&nbsp;CPU/All in One/Laptops</a>
+                                @*<a class="nav-link" href="@Url.Action("InboxPrintersComponents","Component")"><i class="fa fa-print"></i>&nbsp;Printers</a>*@
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+
+                <div class="container-fluid-sm">
+                    <div class="card">
+                        <div class="card-body">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+
+        </div>
+    </div>
+    <script src="~/dist/Online/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="~/dist/Online/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/dist/js/scripts.js"></script>
+    <script src="~/dist/Online/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="~/dist/Online/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
+

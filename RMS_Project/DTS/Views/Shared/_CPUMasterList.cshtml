@@ -1,0 +1,212 @@
+﻿@model System.Data.DataSet
+@using System.Data;
+
+@{
+    int SrNo = 1;
+    int SrNoA = 1;
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<fieldset class="col-lg-12">
+    <ul class="nav nav-pills" style="background-color:#cbefeb;font-weight:bold">
+
+        <li class="nav-item">
+            <a class="nav-link active rounded-0" data-toggle="pill" href="#NotAssignedCPU">CPUs Not Assigned to Circles</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link  rounded-0" data-toggle="pill" href="#AssignedCPU">CPUs Assigned to Circles</a>
+        </li>
+    </ul>
+
+    @if (Model != null)
+    {
+        <div class="form-group">
+            <div class="table-responsive">
+                <div class="tab-content">
+                    <div class="tab-pane container active p-1" id="NotAssignedCPU">
+                        <h5 class="p-0 text-center"><b>List of Not Assigned (CPU/All in One/Laptops)</b></h5>
+                       
+                        <table class="table table-bordered table-striped mt-2 small">                          
+                            <thead class="thead-dark text-white">
+                                <tr>
+                                    <th colspan="2">Name of Circle:</th>
+                                    <th colspan="2">@Html.DropDownList("list", new SelectList((System.Collections.IEnumerable)ViewBag.CircleList,"Value", "Text", "--Select Circle--"), new {@class = "form-control Value" })</th>
+                                    <th colspan="7"><button type="submit" onclick="AssignOffice()" class="btn btn-success">Click here to Assign</button></th>
+                                </tr>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Sr. No.</th>
+                                    <th>Equipment Type</th>
+                                    <th>Serial No.</th>
+                                    <th>Model</th>
+                                    <th>Maker</th>
+                                    <th>Processor</th>
+                                    <th>RAM</th>
+                                    <th>Storage</th>
+                                    <th>Warranty (In Years)</th>
+                                    <th>Assigned Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @if (Model.Tables[0].Rows.Count>0)
+                                {
+                                    foreach (DataRow row in Model.Tables[0].Rows)
+                                    {
+
+                                        <tr>                                            
+                                            <td><input type="checkbox" class="ChkCPU" value="@row["CPUId"]"></td>
+                                            <td>@SrNo.</td>
+                                            <td>@row["EquipmentName"] </td>
+                                            <td>@row["CPUSerialNo"] </td>
+                                            <td>@row["DeviceModel"] </td>
+                                            <td>@row["MakerName"] </td>
+                                            <td>@row["ProcessorType"] </td>
+                                            <td>@row["RAMSize"] </td>
+                                            <td>@row["Storage"] </td>
+                                            <td>@row["Warranty"] </td>
+                                            <td>Not Assigned</td>
+                                        </tr>
+                                        SrNo++;
+
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="11" style="color: red; text-align: center">No Data Exists</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    <div class="tab-pane container p-1" id="AssignedCPU">
+                        <h5 class="p-0 text-center"><b>List of Assigned (CPU/All in One/Laptops)</b></h5>
+                        <div class="col-sm-2">
+                            <div class="btn btn-cyan"> @Html.ActionLink("Create Pdf", "CreatePdf", "Component") </div>
+                        </div> 
+                        <table class="table table-bordered table-striped mt-2 small sorting_asc">
+                            <thead class="thead-dark text-white">
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Sr. No.</th>
+                                    <th>Assigned Circle</th>
+                                    <th>Assigned District</th>
+                                    <th>Equipment Type</th>
+                                    <th>Serial No.</th>
+                                    <th>Device</th>
+                                    <th>Maker</th>
+                                    <th>Processor</th>
+                                    <th>RAM</th>
+                                    <th>Storage</th>
+                                    <th>Warranty (In Years)</th>
+                                    <th>Status<br />VCode</th>
+                                   
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @if (Model.Tables[1].Rows.Count>0)
+                                {
+                                    foreach (DataRow row in Model.Tables[1].Rows)
+                                    {
+
+                                        <tr>
+                                            <td>@*<input type="checkbox" class="ChkAssignedCPU" value="@row["CPUId"]">*@
+                                            <br />
+                                                <div onclick="LogDetails(@row["CPUId"])" class="btn-xs btn-blue">
+                                                    Log
+                                                </div>
+                                            
+                                            </td>
+                                            <td>@SrNoA.</td>
+                                            <td>@row["CircleName"]</td>
+                                            <td>@row["DistrictName"]</td>
+                                            <td>@row["EquipmentName"] </td>
+                                            <td>@row["CPUSerialNo"] </td>
+                                            <td>@row["DeviceModel"] </td>
+                                            <td>@row["MakerName"] </td>
+                                            <td>@row["ProcessorType"] </td>
+                                            <td>@row["RAMSize"] </td>
+                                            <td>@row["Storage"] </td>
+                                            <td>@row["Warranty"] </td>
+                                            <td style="background-color:cadetblue;color:white">Assigned<br />@row["VerificationCode"]</td>
+                                            
+                                        </tr>
+                                        SrNoA++;
+
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="12" style="color: red; text-align: center">No Data Exists</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+    }
+</fieldset>
+
+<input type="hidden" id="CPUIdHidden" />
+<div class="container">
+    <div class="modal" id="ModelComponentAssigntoStaff" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:800px;position:center">
+                <div class="modal-header">
+                    <h5 class="modal-title">Employee Details</h5>
+                </div>
+                <div class="modal-body" id="BodyComponentAssigntoStaff">
+                    <form></form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="Close()" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function AssignOffice()
+    {
+        var CPUIDs=[];
+        var Circle_Id = $('.Value').val();
+        $('.ChkCPU:checked').each(function () {
+            CPUIDs.push($(this).val());
+        });
+        var selected;
+        selected = CPUIDs.join(',');
+        if (selected.length > 0 && Circle_Id > 0) {
+            $.ajax({
+                url: '/Component/AssignCPUtoCircle',
+                type: "Get",
+                dataType: "json",
+                contentType: "application/json",
+                data: { CircleId: Circle_Id, CPUIds: selected },
+                success: function (res) {
+                    alert('Verification Code for the Selected Equipment is  ' + res + ".");
+                    window.location.reload();
+
+                }
+            });
+        } else { alert('Please Select Circle or Select CPU')}
+    }
+
+    var LogDetails = function (CPUId) {  
+        $("#CPUIdHidden").val(CPUId);
+        var url = '/Component/GetEmployeeLog?CPUId=' + CPUId;
+        $('#BodyComponentAssigntoStaff').load(url, function ()
+        {
+            $('#ModelComponentAssigntoStaff').modal('show');
+        })            
+    };
+</script>

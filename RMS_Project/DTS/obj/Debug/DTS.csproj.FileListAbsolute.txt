@@ -1,0 +1,115 @@
+D:\Working Project\DTS\DTS\bin\roslyn\csc.exe
+D:\Working Project\DTS\DTS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Working Project\DTS\DTS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Working Project\DTS\DTS\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Working Project\DTS\DTS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Working Project\DTS\DTS\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Working Project\DTS\DTS\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Working Project\DTS\DTS\bin\roslyn\System.Collections.Immutable.dll
+D:\Working Project\DTS\DTS\bin\roslyn\System.Reflection.Metadata.dll
+D:\Working Project\DTS\DTS\bin\roslyn\vbc.exe
+D:\Working Project\DTS\DTS\bin\roslyn\VBCSCompiler.exe
+D:\Working Project\DTS\DTS\bin\roslyn\VBCSCompiler.exe.config
+D:\Working Project\DTS\DTS\bin\DTS.dll.config
+D:\Working Project\DTS\DTS\bin\DTS.dll
+D:\Working Project\DTS\DTS\bin\DTS.pdb
+D:\Working Project\DTS\DTS\bin\Antlr3.Runtime.dll
+D:\Working Project\DTS\DTS\bin\Microsoft.AI.Agent.Intercept.dll
+D:\Working Project\DTS\DTS\bin\Microsoft.AI.DependencyCollector.dll
+D:\Working Project\DTS\DTS\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\Working Project\DTS\DTS\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\Working Project\DTS\DTS\bin\Microsoft.AI.Web.dll
+D:\Working Project\DTS\DTS\bin\Microsoft.AI.WindowsServer.dll
+D:\Working Project\DTS\DTS\bin\Microsoft.ApplicationInsights.dll
+D:\Working Project\DTS\DTS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Working Project\DTS\DTS\bin\Microsoft.Owin.dll
+D:\Working Project\DTS\DTS\bin\Microsoft.Web.Infrastructure.dll
+D:\Working Project\DTS\DTS\bin\Newtonsoft.Json.dll
+D:\Working Project\DTS\DTS\bin\Owin.dll
+D:\Working Project\DTS\DTS\bin\System.Web.Helpers.dll
+D:\Working Project\DTS\DTS\bin\System.Web.Mvc.dll
+D:\Working Project\DTS\DTS\bin\System.Web.Optimization.dll
+D:\Working Project\DTS\DTS\bin\System.Web.Razor.dll
+D:\Working Project\DTS\DTS\bin\System.Web.WebPages.Deployment.dll
+D:\Working Project\DTS\DTS\bin\System.Web.WebPages.dll
+D:\Working Project\DTS\DTS\bin\System.Web.WebPages.Razor.dll
+D:\Working Project\DTS\DTS\bin\WebGrease.dll
+D:\Working Project\DTS\DTS\bin\Antlr3.Runtime.pdb
+D:\Working Project\DTS\DTS\bin\Microsoft.AI.DependencyCollector.xml
+D:\Working Project\DTS\DTS\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Working Project\DTS\DTS\bin\Microsoft.AI.Web.xml
+D:\Working Project\DTS\DTS\bin\Microsoft.AI.WindowsServer.xml
+D:\Working Project\DTS\DTS\bin\Microsoft.ApplicationInsights.xml
+D:\Working Project\DTS\DTS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Working Project\DTS\DTS\bin\Microsoft.Owin.xml
+D:\Working Project\DTS\DTS\bin\Newtonsoft.Json.xml
+D:\Working Project\DTS\DTS\bin\System.Web.Helpers.xml
+D:\Working Project\DTS\DTS\bin\System.Web.Mvc.xml
+D:\Working Project\DTS\DTS\bin\System.Web.Optimization.xml
+D:\Working Project\DTS\DTS\bin\System.Web.Razor.xml
+D:\Working Project\DTS\DTS\bin\System.Web.WebPages.xml
+D:\Working Project\DTS\DTS\bin\System.Web.WebPages.Deployment.xml
+D:\Working Project\DTS\DTS\bin\System.Web.WebPages.Razor.xml
+D:\Working Project\DTS\DTS\obj\Debug\DTS.dll
+D:\Working Project\DTS\DTS\obj\Debug\DTS.pdb
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\csc.exe
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\System.Collections.Immutable.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\System.Reflection.Metadata.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\vbc.exe
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\VBCSCompiler.exe
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\roslyn\VBCSCompiler.exe.config
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\DTS.dll.config
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\DTS.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\DTS.pdb
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Antlr3.Runtime.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.AI.Agent.Intercept.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.AI.DependencyCollector.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.AI.Web.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.AI.WindowsServer.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.ApplicationInsights.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.Owin.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.Web.Infrastructure.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Newtonsoft.Json.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Owin.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.Helpers.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.Mvc.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.Optimization.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.Razor.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.WebPages.Deployment.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.WebPages.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.WebPages.Razor.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\WebGrease.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Antlr3.Runtime.pdb
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.AI.DependencyCollector.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.AI.Web.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.AI.WindowsServer.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.ApplicationInsights.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Microsoft.Owin.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\Newtonsoft.Json.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.Helpers.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.Mvc.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.Optimization.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.Razor.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.WebPages.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.WebPages.Deployment.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\bin\System.Web.WebPages.Razor.xml
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\obj\Debug\DTS.csproj.CoreCompileInputs.cache
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\obj\Debug\DTS.csproj.CopyComplete
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\obj\Debug\DTS.dll
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\obj\Debug\DTS.pdb
+E:\Working Project for Office(CCP NCR)\Device Tracking System\09.10.2020\DTS\DTS\obj\Debug\DTS.csprojAssemblyReference.cache
+D:\Working Project\DTS\DTS\obj\Debug\DTS.csprojResolveAssemblyReference.cache
+D:\Working Project\DTS\DTS\bin\BouncyCastle.Crypto.dll
+D:\Working Project\DTS\DTS\bin\itextsharp.dll
+D:\Working Project\DTS\DTS\bin\itextsharp.xml

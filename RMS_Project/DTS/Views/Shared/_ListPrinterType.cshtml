@@ -1,0 +1,54 @@
+﻿@model DTS.Models.PrinterTypeModel
+@{
+    var SRNO = 1;
+}
+
+<form style="padding-top:15px">
+    <hr />
+    <h2>List of PrinterType</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    Sr. No
+                </th>
+                <th>
+                    PrinterType Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @if (Model.LIST_PRINTERTYPE.Count > 0 && Model.LIST_PRINTERTYPE[0].Message == null)
+        {
+            foreach (var item in Model.LIST_PRINTERTYPE)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.PrinterTypeId, new { @class = "PrinterTypeId" })
+                        @SRNO
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrinterType)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="EditPrinterType(@item.PrinterTypeId)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="DeletePrinterType(@item.PrinterTypeId)">Delete</button>
+
+                    </td>
+                </tr>
+                SRNO++;
+            }
+        }
+        else
+        {
+            <tr class="table-danger">
+                <td colspan="3" style="text-align: center">No Data Exists</td>
+            </tr>
+        }
+    </table>
+</form>
+
+
+

@@ -1,0 +1,52 @@
+﻿@model DTS.Models.CircleModel
+@{
+    var SRNO = 1;
+}
+
+<form style="padding-top:15px">
+    <hr />
+    <h2>List of Circles</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    Sr. No
+                </th>
+                <th>
+                    Circle Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @if (Model.LIST_CIRCLE.Count > 0 && Model.LIST_CIRCLE[0].Error== null)
+        {
+        foreach (var item in Model.LIST_CIRCLE)
+        {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.CircleId, new { @class = "CircleId" })
+                        @SRNO
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CircleName)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="EditCircle(@item.CircleId)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="DeleteCircle(@item.CircleId)">Delete</button>
+
+                    </td>
+                </tr>
+            SRNO++;
+        }
+    }
+    else
+    {
+            <tr class="table-danger">
+                <td colspan="3" style="text-align: center">No Data Exists</td>
+            </tr>
+    }
+    </table>
+</form>
+

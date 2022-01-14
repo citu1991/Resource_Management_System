@@ -1,0 +1,126 @@
+﻿@model DTS.Models.CircleDistrictModel
+@{
+    var SRNO = 1;
+}
+
+<form style="padding-top:15px">
+    <hr />
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th colspan="4" style="text-align:center;font-size:large">List of Districts</th>
+            </tr>
+            <tr>
+                <th>
+                    Sr.No
+                </th>
+                <th>
+                    Circle Name
+                </th>
+                <th>
+                    District Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+
+        @if (Model.LIST_CIRCLE.Count > 0)
+        {
+            foreach (var item in Model.LIST_CIRCLE)
+            {
+
+                <tr>
+                    <td>@SRNO .</td>
+                    <td>@Html.DisplayFor(modelitem => item.CircleName) </td>
+                    @if (Model.LIST_DISTRICT.Count > 0)
+                    {
+                        <td>
+                            @foreach (var itemDistrcict in Model.LIST_DISTRICT)
+                            {
+                                if (item.CircleId == itemDistrcict.CircleId)
+                                {
+                                    @Html.DisplayFor(modelitem => itemDistrcict.DistrictName)
+                                    <br />
+                                                    <br />
+                                                    <br />
+                                }
+                               
+
+                            }
+
+                        </td>
+
+                                        <td>
+                                            @foreach (var itemDistrcict in Model.LIST_DISTRICT)
+                                            {
+                                                if (item.CircleId == itemDistrcict.CircleId)
+                                                {
+
+
+                                                    <div onclick="EditDistrict(@itemDistrcict.DistrictId)" class="btn btn-primary">
+                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                        <span>
+                                                            <strong>Edit</strong>
+                                                        </span>
+                                                    </div>
+                                                   
+                                                        <b>|</b>
+                                                        <div onclick="ConfirmDelete(@itemDistrcict.DistrictId)" class="btn btn-danger">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                            <span>
+                                                                <strong>Delete</strong>
+                                                            </span>
+                                                        </div>
+                                                    
+                                                    <br />
+                                                    <br />
+                                                }
+                                            }
+
+                                        </td>
+                    }
+                </tr>
+                SRNO++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" style="color: red; text-align: center">No Data Exists</td>
+            </tr>
+        }
+
+
+        @*@if (Model.LIST_DISTRICT.Count > 0)
+        {
+            foreach (var item in Model.LIST_CIRCLE)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.CircleId, new { @class = "CircleId" })
+                        @SRNO
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CircleName)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="ActivateUser(@item.CircleId)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="DeactiveUser(@item.CircleId)">Delete</button>
+
+                    </td>
+                </tr>
+                SRNO++;
+            }
+        }
+        else
+        {
+            <tr class="table-danger">
+                <td colspan="4" style="text-align: center">No Data Exists</td>
+            </tr>
+        }*@
+    </table>
+</form>
+

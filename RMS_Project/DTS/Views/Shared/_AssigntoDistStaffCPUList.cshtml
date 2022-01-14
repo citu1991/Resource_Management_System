@@ -1,0 +1,341 @@
+﻿@model System.Data.DataSet
+@using System.Data;
+
+@{
+    int SrNo = 1;
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<fieldset class="col-lg-12">
+    <ul class="nav nav-pills" style="background-color:#cbefeb;font-weight:bold">
+
+        <li class="nav-item">
+            <a class="nav-link active rounded-0" data-toggle="pill" href="#InboxCPU">CPUs Assignment Pending For Staff/Officers</a>
+        </li>
+    </ul>
+
+    @if (Model != null)
+    {
+        <div class="form-group col-lg-12">
+            <div class="table-responsive">
+                <div class="tab-content">
+                    <div class="tab-pane container active p-1" id="InboxCPU">
+                        <h5 class="p-0 text-center"><b>List of CPU/All in One/Laptops</b></h5>
+
+                        <table class="table table-bordered table-striped mt-2 small">
+                            <thead class="thead-dark text-white">
+                                @*<tr>
+                                        <th colspan="2">Name of District Offices:</th>
+                                        <th colspan="3">@Html.DropDownList("list", new SelectList((System.Collections.IEnumerable)ViewBag.DistrictList, "Value", "Text", "--Select District Office--"), new { @class = "form-control DistrictValue" })</th>
+                                        <th colspan="6"><button type="submit" onclick="AssignCPUtoDistrictOffice()" class="btn btn-success">Click here to Assign</button></th>
+                                    </tr>*@
+                                <tr>
+                                    <th colspan="3" style="text-align:center">Action</th>
+
+                                    <th>Sr. No.</th>
+                                    <th>Equipment Type</th>
+                                    <th>Serial No.</th>
+                                    <th>Model</th>
+                                    <th>Maker</th>
+                                    <th>Processor</th>
+                                    <th>RAM</th>
+                                    <th>Storage</th>
+                                    <th>Warranty (In Years)</th>
+                                    <th>District Name</th>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @if (Model.Tables[0].Rows.Count > 0)
+                                {
+                                    foreach (DataRow row in Model.Tables[0].Rows)
+                                    {
+                                        <tr>
+                                            @*<td><input type="checkbox" class="AssignCPUtoDoffice" value="@row["CPUId"]"></td>*@                                           
+                                            <td>
+                                                @if (bool.Parse(@row["IsStaffAssigned"].ToString()))
+                                                {
+                                                     <div onclick="ViewEmployeeName(@row["AssignedId"],@row["CPUId"])" class="btn-xs btn-danger">
+                                                            Active User
+                                                        </div>
+                                                }
+                                                else
+                                                {
+                                                <input type="button" class="btn-xs btn-success" onclick="AssignCPUtoStaff(@row["AssignedId"],@row["CPUId"])" value="Assign to Staff">
+                                                }
+                                            </td>
+
+                                        @if (bool.Parse(@row["IsStaffAssigned"].ToString()))
+                                        {
+                                            <td><div onclick="DeallocateComponent(@row["AssignedId"],@row["CPUId"])" class="btn-xs btn-success">
+                                                Deallocate Device&nbsp;&nbsp;
+                                           </div></td>
+                                        }
+                                        else
+                                        { <td></td>}
+                                            <td><div onclick="LogDetails(@row["CPUId"])" class="btn-xs btn-blue">
+                                                Log
+                                            </div></td>
+                                            <td>@SrNo.@*<input type="hidden" id="hiddenCPUId" value="@row["CPUId"]" />*@</td>
+                                            <td>@row["EquipmentName"] </td>
+                                            <td>@row["CPUSerialNo"] </td>
+                                            <td>@row["DeviceModel"] </td>
+                                            <td>@row["MakerName"] </td>
+                                            <td>@row["ProcessorType"] </td>
+                                            <td>@row["RAMSize"] </td>
+                                            <td>@row["Storage"] </td>
+                                            <td>@row["Warranty"] </td>
+                                            <td>@row["DistrictName"] </td>
+
+                                        </tr>
+                                        SrNo++;
+
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="12" style="color: red; text-align: center">No Data Exists for Verification</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+</fieldset>
+<input type="hidden" id="CPUIdHidden" />
+<input type="hidden" id="AssignedIdHidden" />
+<input type="hidden" id="PayeeCodeHidden" />
+<div class="container">
+
+    <div class="modal"  id="MyCPUAssigntoStaffModel" tabindex="-1" role="dialog">
+        <div class="modal-dialog"  role="document">
+            <div class="modal-content" style="width:700px;position:center">
+                <div class="modal-header">
+                    <h5 class="modal-title">Employee Details</h5>
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+                </div>
+                <div class="modal-body" id="editModalBody">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputPayeeCode">Payee Code</label>
+                                <input type="text" class="form-control"  id="inputPayeeCode" onchange="ValidatePayeeCode(this.value)"  required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputDesignation">Designation</label>
+                                <input type="text" class="form-control" id="inputDesignation" required>
+                            </div>
+                            
+                        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputName">Name</label>
+                        <input type="text" class="form-control" id="inputName"  required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputMobile">Mobile No</label>
+                        <input type="text" class="form-control" id="inputMobile"  required>
+                    </div>
+                </div>
+                
+                </form>
+            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="ConfirmAssignBtn" onclick="ConfirmAssignment()">Confirm Assign</button>
+                    <button type="button" class="btn btn-secondary" onclick="Close()" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="ModelComponentAssigntoStaff" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:800px;position:center">
+                <div class="modal-header">
+                    <h5 class="modal-title">Employee Details</h5>                  
+                </div>
+                <div class="modal-body" id="BodyComponentAssigntoStaff">
+                    <form>                        
+                        
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="Close()" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript">
+
+       
+
+        var ValidatePayeeCode = function (PCode)
+        {         
+            var PayeeCode = $("#PayeeCodeHidden").val(PCode);
+            var CPUID = $("#CPUIdHidden").val();
+            if (PayeeCode != null || PayeeCode != '')
+            {
+                debugger;
+                $.ajax({
+                    url: '/Component/VerifyPayeeCode',
+                    type: "Get",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: { EmployeePayeeCode: PCode, CPU_ID: CPUID },
+                    success: function (res)
+                    {                       
+                        if (res <= 0)
+                        {
+                            alert('System Already Assigned to Current User Having PayeeCode : ' + PCode);
+                                                       
+                        }
+                        else
+                        {
+                            $('#ConfirmAssignBtn').show();
+                        }
+                       
+                    }
+                });
+            }
+            else {
+                alert('Please Select Officer/Staff Name or System No');
+            }
+        }
+
+        //var DeallocateComponent = function (AssignId,CPUId) {            
+        //    $("#AssignedIdHidden").val(AssignId);
+        //    $("#CPUIdHidden").val(CPUId);
+        //    if(Confirm('Do you want to Proceed'))
+        //    {
+        //        var url = '/Component/DeallocateDevice?AssignId=' + AssignId + '&CPUId=' + CPUId;
+        //        $('#BodyComponentAssigntoStaff').load(url, function () {
+        //            $('#ModelComponentAssigntoStaff').modal('show');
+        //        })
+        //    }else{ window.location.reload();}
+        //};
+
+        var DeallocateComponent = function (AssignedId, CPUId)
+        {
+            //var AssignedId=$("#AssignedIdHidden").val(AssignedId);
+           // var CPUId=$("#CPUIdHidden").val(CPUId);
+            if (AssignedId != null && CPUId != '')
+            {
+                var conf = confirm('Do you want to Proceed for Device Deallocation.');
+                if(conf)
+                {                   
+                    $.ajax({
+                        url: '/Component/DeallocateDevice',
+                        type: "Get",
+                        dataType: "json",
+                        contentType: "application/json",
+                        data: { Assign_Id: AssignedId, CPU_Id: CPUId },
+                        success: function (res)
+                        {
+                            if (res > 0)
+                            {
+                                alert('System Deallocated Successfully.');
+                                window.location.reload();
+                            }
+                            else
+                            {
+                                alert('!Alert: System Not Deallocated.');
+                                window.location.reload();
+                            }
+                       
+                        },
+                        error: function(q,b,c) {
+                        console.log("someeeor");
+                    }
+                    });
+                } else {
+                    alert('Device Deallocation Cancelled by User.');
+                    window.location.reload();
+                }
+              
+            }
+            else {
+                alert('!Error Occured.');
+                window.location.reload();
+            }
+        }
+
+        var AssignCPUtoStaff = function (AssignId,CPUId) {            
+            $("#AssignedIdHidden").val(AssignId);
+            $("#CPUIdHidden").val(CPUId);
+            $('#MyCPUAssigntoStaffModel').modal('show');
+            $('#ConfirmAssignBtn').hide();
+        };
+
+        var ViewEmployeeName = function (AssignId,CPUId) {            
+            $("#AssignedIdHidden").val(AssignId);
+            $("#CPUIdHidden").val(CPUId);
+            var url = '/Component/GetAssignedEmployeeName?AssignId=' + AssignId + '&CPUId=' + CPUId;
+            $('#BodyComponentAssigntoStaff').load(url, function () 
+            {               
+                $('#ModelComponentAssigntoStaff').modal('show');
+            })            
+        };
+
+        var LogDetails = function (CPUId) {  
+            $("#CPUIdHidden").val(CPUId);
+            var url = '/Component/GetEmployeeLog?CPUId=' + CPUId;
+            $('#BodyComponentAssigntoStaff').load(url, function ()
+            {
+                $('#ModelComponentAssigntoStaff').modal('show');
+            })            
+        };
+
+       
+
+        function ConfirmAssignment() {
+            debugger
+            var assignid=$("#AssignedIdHidden").val();
+            var CPUid=$("#CPUIdHidden").val();
+            var PCode = $("#PayeeCodeHidden").val();
+            var Desig=$('#inputDesignation').val();
+            var Name=$('#inputName').val();
+            var Mobile=$('#inputMobile').val();
+            if (assignid>0 && CPUid>0 && PCode!='' && Desig!='' && Name!='' && Mobile!='')
+            {
+                $.ajax({
+                    url: '/Component/AssignCPUtoStaff',
+                    type: "Get",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: { AssignedId: assignid, CPUId: CPUid, PayeeCode: PCode,Designation:Desig,EmpName:Name,EmpMobile:Mobile },
+                    success: function (res) {
+
+                        if (res > 0)
+                        {
+                            alert('System Assigned to User Successfully having PayeeCode :'+PCode); window.location.reload();
+                        }
+                        else { alert('Error!........System not assigned.'); }
+                       
+                    }
+                });
+            }
+            else {
+                alert('Error! All Inputs are Required');
+            }
+
+        }       
+
+        function Close() {
+            window.location.reload();
+        };
+       
+    </script>

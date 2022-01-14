@@ -1,0 +1,53 @@
+﻿@model DTS.Models.PortModel
+@{
+    var SRNO = 1;
+}
+
+<form style="padding-top:15px">
+    <hr />
+    <h2>List of Ports</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    Sr. No
+                </th>
+                <th>
+                    No of Ports
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @if (Model.LIST_PORT.Count > 0 && Model.LIST_PORT[0].Message == null)
+        {
+            foreach (var item in Model.LIST_PORT)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.PortId, new { @class = "PortId" })
+                        @SRNO
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Port)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="EditPort(@item.PortId)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="DeletePort(@item.PortId)">Delete</button>
+
+                    </td>
+                </tr>
+                SRNO++;
+            }
+        }
+        else
+        {
+            <tr class="table-danger">
+                <td colspan="3" style="text-align: center">No Data Exists</td>
+            </tr>
+        }
+    </table>
+</form>
+
+

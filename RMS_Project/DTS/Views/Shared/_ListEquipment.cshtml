@@ -1,0 +1,52 @@
+﻿@model DTS.Models.EquipmentTypeModel
+@{
+    var SRNO = 1;
+}
+
+<form style="padding-top:15px">
+    <hr />
+    <h2>List of Equipment Type</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    Sr. No
+                </th>
+                <th>
+                    Equipment Type Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @if (Model.LIST_EQUIPMENTTYPE.Count > 0 && Model.LIST_EQUIPMENTTYPE[0].Error == null)
+        {
+            foreach (var item in Model.LIST_EQUIPMENTTYPE)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.EquipmentId, new { @class = "EquipmentId" })
+                        @SRNO
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EquipmentName)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="EditEquipment(@item.EquipmentId)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="DeleteEquipment(@item.EquipmentId)">Delete</button>
+
+                    </td>
+                </tr>
+                SRNO++;
+            }
+        }
+        else
+        {
+            <tr class="table-danger">
+                <td colspan="3" style="text-align: center">No Data Exists</td>
+            </tr>
+        }
+    </table>
+</form>
+

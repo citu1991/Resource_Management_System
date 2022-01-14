@@ -1,0 +1,148 @@
+﻿
+@model DTS.Models.Active_InActiveUsers
+
+@{
+    var SRNO = 1;
+    ViewBag.Title = "List of Active Users";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<h2>List of Active Users</h2>
+<fieldset class="col-lg-12">
+    <div class="form-group">
+        <div class="table-responsive">
+            @if (Model != null)
+            {
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>
+                                Sr. No
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Mobile No
+                            </th>
+                            <th>
+                                Current Circle
+                            </th>
+                            <th>
+                                Email Id
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>                   
+                    @if (Model.LISTACT_INACT.Count > 0 && Model.LISTACT_INACT[0].Exception == null)
+                    {
+                        foreach (var item in Model.LISTACT_INACT)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.UserId, new { @class = "UserId" })
+                                    @SRNO.
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserMobNo)
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.CircleId, new { @class = "CircleId" })                                                              
+                                   <button type="button" class="btn btn-light hover-check" data-toggle="tooltip" data-html="true" data-placement="bottom" title="@item.DistrictOfficeString">
+                                        @item.CircleName
+                                    </button>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserEmailId)
+                                </td>
+                                <td>
+                                    <div class="btn btn-danger" onclick="DeactivateUser(@item.UserId)">Make User In-Active</div>
+                                    
+
+                                </td>
+                            </tr>
+                            SRNO++;
+                        }
+                    }
+                    else
+                    {
+                        <tr class="table-danger">
+                            <td colspan="6" style="text-align: center">No Data Exists</td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</fieldset>
+
+<input type="hidden" id="hiddenUserId" />
+<input type="hidden" id="hiddenCircleId" />
+<input type="hidden" id="msg" />
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #fefefe; margin: auto; padding: 20px; border: 1px solid #888; width: auto;">
+            <div class="modal-header alert alert-danger">
+                <h4 class="modal-title" id="myModalLabel">Infromation Dialog</h4>
+            </div>
+            <div class="modal-body">
+                <p class="success-message" id="Bodymsg"> </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" onclick="ConfirmAction()">Confirm</button>
+                <button class="btn btn-dark" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/dist/Online/jquery-3.4.1.min.js"></script>
+<script>
+    function ConfirmAction() {
+        debugger
+        var User_Id = $("#hiddenUserId").val();
+        var msg = $("#msg").val();
+        if (User_Id != '') {
+            $.ajax({
+                url: '/UserRegistration/ConfirmUserAction',
+                data: { UserId: User_Id, ActionOnUser: msg },
+                type: 'POST',
+                success: function (data) {
+                    if (data) {
+                        if ($('.modal-header').hasClass('alert-danger')) {
+                            $('.modal-header').removeClass('alert-danger').addClass('alert-success');
+                            $('.btn-info').css('display', 'none');
+                            $('.btn-dark').css('display', 'none');
+                        }
+                        $('.success-message').html('Action taken Successfully please refresh the page by pressing F5 key.');
+                    }
+                }, error: function (err) {
+                    if (!$('.modal-header').hasClass('alert-danger')) {
+                        $('.modal-header').removeClass('alert-success').addClass('alert-danger');
+                        $('.btn-info').css('display', 'none');
+                    }
+                    $('.success-message').html(err.statusText);
+                }
+            });
+        }
+    };
+    var circleNameAssigned = function (CircleId) {
+        $("#hiddenCircleName").val(CircleId);
+        $('#myOfficeModal').modal('show');
+    }
+
+    var DeactivateUser = function (UserId) {
+        $("#hiddenUserId").val(UserId);
+        $("#msg").val("UserDeactivation");
+        $('#myModal').modal('show');
+        $('.success-message').html('Are you sure you want to Make this User as a In-Active User?');
+    }  
+
+
+</script>
